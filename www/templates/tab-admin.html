@@ -1,0 +1,65 @@
+<ion-view view-title="Admin">
+  <ion-content padding="true">
+    <div class="">
+      this is the admin route
+    </div>
+    <div class="polls">
+      <button class="button button-positive showCreate" ng-click="createPollToggle = !createPollToggle" ng-hide="createPollToggle">Create New Poll</button>
+      <div class="createpoll" ng-hide="!createPollToggle">
+        <button class="button button-clear button-positive" ng-click="unhide()">
+          + Add answer
+        </button>
+        <form ng-submit="createPoll()">
+          <div class="list">
+            <label class="item item-input">
+              <input type="text" placeholder="Poll title/question" ng-model="addPoll.title">
+            </label>
+            <label class="item item-input">
+              <input type="text" placeholder="Poll answer #1" ng-model="addPoll.answers[0].text">
+            </label>
+            <label class="item item-input">
+              <input type="text" placeholder="Poll answer #2" ng-model="addPoll.answers[1].text">
+            </label>
+            <label class="item item-input">
+              <input type="text" placeholder="Poll answer #3" ng-model="addPoll.answers[2].text">
+            </label>
+            <label class="item item-input" ng-hide="addPoll.show[0]">
+              <input type="text" placeholder="Poll answer #4" ng-model="addPoll.answers[3].text">
+            </label>
+            <label class="item item-input" ng-hide="addPoll.show[1]">
+              <input type="text" placeholder="Poll answer #5" ng-model="addPoll.answers[4].text">
+            </label>
+            <label class="item item-input" ng-hide="addPoll.show[2]">
+              <input type="text" placeholder="Poll answer #6" ng-model="addPoll.answers[5].text">
+            </label>
+            <label class="item item-input" ng-hide="addPoll.show[3]">
+              <input type="text" placeholder="Poll answer #7" ng-model="addPoll.answers[6].text">
+            </label>
+            <label class="item item-input" ng-hide="addPoll.show[4]">
+              <input type="text" placeholder="Poll answer #8" ng-model="addPoll.answers[7].text">
+            </label>
+            <label class="item item-input" ng-hide="addPoll.show[5]">
+              <input type="text" placeholder="Poll answer #9" ng-model="addPoll.answers[8].text">
+            </label>
+            <label class="item item-input" ng-hide="addPoll.show[6]">
+              <input type="text" placeholder="Poll answer #10" ng-model="addPoll.answers[9].text">
+            </label>
+            <label class="item item-input">
+              <div class="title_toggle">
+                Active?
+              </div>
+            <label class="toggle">
+             <input type="checkbox" ng-model="addPoll.active" ng-value="true">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+           </label>
+          </label>
+          </div>
+          <input type="submit" class="button button-block button-positive" value="Create Poll">
+        </form>
+        <input type="button" class="button button-block button-assertive" value="Cancel" ng-click="createPollToggle = !createPollToggle">
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

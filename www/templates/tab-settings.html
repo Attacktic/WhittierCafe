@@ -1,0 +1,24 @@
+<ion-view view-title="Account">
+  <ion-content padding="true">
+    <div class="activeFalse" ng-hide="activeUser() === true">
+    <form ng-submit="verify()" name="loginform">
+    <div class="list">
+      <label class="item item-input">
+        <span ng-class="{invalid: loginform.email.$invalid && loginform.email.$dirty }" class="input-label" ng-class="{invalid: loginform.name.$invalid && loginform.name.$dirty }">Email</span>
+        <input type="email" ng-model="form.email" name="email" required>
+      </label>
+      <label class="item item-input">
+        <span ng-class="{invalid: loginform.password.$invalid && loginform.password.$dirty }" class="input-label">Password</span>
+        <input type="password" ng-model="form.password" name="password" required>
+      </label>
+    </div>
+    <input type="submit" class="button button-block button-energized" value="Sign In"></input>
+    </form>
+    <div class="divider"><hr/><span> or </span><hr/></div>
+    <button class="button button-block button-positive" ng-click="createredirect()">Create an Account</button>
+    </div>
+    <div class="activeTrue" ng-show="activeUser() === true">
+      <button class="button button-block button-assertive" ng-click="logout()">Log out</button>
+    </div>
+  </ion-content>
+</ion-view>

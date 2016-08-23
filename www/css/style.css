@@ -1,0 +1,41 @@
+/* Empty. Add your own CSS if you like */
+
+.invalid{
+  color: red;
+}
+
+h5{
+  margin: auto;
+  text-align: center;
+}
+
+.divider {
+  margin: auto;
+  text-align:center;
+  position: relative;
+  margin-top: 2vh;
+}
+
+.divider hr {
+  display: inline-block;
+  width:20%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.divider span{
+  display: inline-block;
+  position: relative;
+  bottom: 4px;
+  font-size: 0.9em;
+}
+
+.title_toggle{
+  display: inline-block;
+  width: 60px;
+  margin-right: 10px;
+}
+
+.showCreate{
+  cursor: pointer;
+}
