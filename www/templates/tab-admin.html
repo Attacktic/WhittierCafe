@@ -61,5 +61,15 @@
         <input type="button" class="button button-block button-assertive" value="Cancel" ng-click="createPollToggle = !createPollToggle">
       </div>
     </div>
+    <div>
+      <div ng-repeat="poll in polls()">
+        <div>
+          poll.title
+          <div ng-repeat="answer in poll.answers">
+            answer.text
+          </div>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

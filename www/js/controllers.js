@@ -90,4 +90,7 @@ $scope.chats = Chats.all();
       active: $scope.addPoll.active
     })
   }
+  $scope.polls = function(){
+    return Poll.getPoll()
+  }
 })
