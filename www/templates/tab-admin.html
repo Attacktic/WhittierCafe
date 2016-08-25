@@ -1,12 +1,15 @@
 <ion-view view-title="Admin">
-  <ion-content padding="true" ng-init="getPolls()">
+  <ion-content padding="true">
+    <div class="">
+      this is the admin route
+    </div>
     <div class="polls">
       <button class="button button-positive showCreate" ng-click="createPollToggle = !createPollToggle" ng-hide="createPollToggle">Create New Poll</button>
       <div class="createpoll" ng-hide="!createPollToggle">
         <button class="button button-clear button-positive" ng-click="unhide()">
           + Add answer
         </button>
-        <form ng-submit="createPoll();createPollToggle = !createPollToggle;clear()">
+        <form ng-submit="createPoll()">
           <div class="list">
             <label class="item item-input">
               <input type="text" placeholder="Poll title/question" ng-model="addPoll.title">
@@ -58,25 +61,15 @@
         <input type="button" class="button button-block button-assertive" value="Cancel" ng-click="createPollToggle = !createPollToggle">
       </div>
     </div>
-
-    <div class="card" ng-repeat="poll in Polls">
-      <div class="item item-divider">
-        {{poll.title}} <a ng-click="deletePoll(poll.id)" style="float: right">delete</a>
-      </div>
-      <div class="item item-text-wrap" ng-repeat="answer in poll.answers">
-        {{answer.answer}}
-      </div>
-      <div class="item item-text-wrap">
-        Active?
-        <label class="toggle">
-         <input type="checkbox" ng-model="poll.active" ng-value="poll.active">
-         <div class="track">
-           <div class="handle"></div>
-         </div>
-      </label>
-      </div>
-    </div>
     <div>
+      <div ng-repeat="poll in polls()">
+        <div>
+          poll.title
+          <div ng-repeat="answer in poll.answers">
+            answer.text
+          </div>
+        </div>
+      </div>
     </div>
   </ion-content>
 </ion-view>
