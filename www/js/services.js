@@ -24,7 +24,7 @@ angular.module('starter.services', [])
     });
   };
   this.verifyUser = function(form){
-    var url = `https://whcbackend.herokuapp.com/verify`
+    var url = `http://localhost:3000/verify`
     var data = {
       email: form.email,
       pass: form.password
@@ -63,7 +63,7 @@ angular.module('starter.services', [])
     });
   };
   this.createUser = function(form){
-    var url = `https://whcbackend.herokuapp.com/createme`
+    var url = `http://localhost:3000/createme`
     var data = {
       pass: form.password,
       email: form.email,
@@ -146,19 +146,31 @@ angular.module('starter.services', [])
 
 .service("Poll", function($localStorage, $rootScope, $state, $http){
   this.createPoll = function(form){
-  var url = `https://whcbackend.herokuapp.com/createpoll`
+  var url = `http://localhost:3000/createpoll`
   var data = form;
   $http.post(url, data)
   .success(function(response){
     console.log("created a poll")
   })
   }
-  this.getPoll = function(){
-    var url = `https://whcbackend.herokuapp.com/polls`
-    $http.get(url)
+  this.getPolls = function(){
+    var url = `http://localhost:3000/polls`
+    return $http.get(url)
     .success(function(polls){
-      console.log(polls);
+      return polls
     })
+    .error(function (error, status){
+      console.log(error, status);
+    });
   }
-  
+  this.deletePoll = function(id){
+    var url = `http://localhost:3000/polls/${id}/delete`
+    $http.get(url)
+    .success(function(response){
+      console.log(response)
+    })
+    .error(function (error, status){
+      console.log(error, status);
+    });
+  }
 })
