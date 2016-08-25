@@ -33,21 +33,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.vote', {
+      url: '/vote',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-vote': {
+          templateUrl: 'templates/tab-vote.html',
+          controller: 'VoteCtrl'
         }
       }
     })
     .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+      url: '/vote/:chatId',
       views: {
-        'tab-chats': {
+        'tab-vote': {
           templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+          controller: 'VoteDetailCtrl'
         }
       }
     })

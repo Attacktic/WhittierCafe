@@ -84,8 +84,8 @@ angular.module('starter.services', [])
   };
 })
 
-.factory('Chats', function() {
-  var chats = [{
+.factory('vote', function() {
+  var vote = [{
     id: 0,
     name: 'Ben Sparrow',
     lastText: 'You on your way?',
@@ -114,15 +114,15 @@ angular.module('starter.services', [])
 
   return {
     all: function() {
-      return chats;
+      return vote;
     },
     remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
+      vote.splice(vote.indexOf(chat), 1);
     },
     get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+      for (var i = 0; i < vote.length; i++) {
+        if (vote[i].id === parseInt(chatId)) {
+          return vote[i];
         }
       }
       return null;
