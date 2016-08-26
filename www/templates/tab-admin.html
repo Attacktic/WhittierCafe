@@ -63,7 +63,7 @@
         <div class="item item-text-wrap">
               {{poll.title}}
               <label class="toggle" style="margin-left: 45%">
-               <input type="checkbox" ng-model="false" ng-value="true">
+               <input type="checkbox" ng-model="poll.active" ng-value="poll.active">
                <div class="track">
                  <div class="handle"></div>
                </div>
@@ -79,7 +79,6 @@
               </div>
           </div>
       </div>
-
     </div>
   </ion-content>
 </ion-view>

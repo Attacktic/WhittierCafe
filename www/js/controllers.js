@@ -8,24 +8,15 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('ChatsCtrl', function($scope, Chats, activeUser, $state) {
-$scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-  $scope.$on('$ionicView.enter', function(e) {
-    if(activeUser.needAuth()){
-      $state.go('tab.settings');
-    }
-  });
+.controller('ChatsCtrl', function($scope, Chats, activeUser, $state, Poll) {
+  $scope.polls = ''; //fix
+  $scope.getPolls = function(){
+    Poll.getPolls().then(function(polls){
+      $scope.polls = polls.data;
+    })
+  }
 })
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats, activeUser, $state) {
-  $scope.chat = Chats.get($stateParams.chatId);
-  $scope.$on('$ionicView.enter', function(e) {
-    if(activeUser.needAuth()){
-      $state.go('tab.settings');
-    }
-  });
 })
 
 .controller('AccountCtrl', function($scope, Login, $state, StorageService, activeUser, $rootScope) {
