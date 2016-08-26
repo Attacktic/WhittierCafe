@@ -1,8 +1,5 @@
 <ion-view view-title="Admin">
-  <ion-content padding="true">
-    <div class="">
-      this is the admin route
-    </div>
+  <ion-content padding="true" ng-init="getPolls()">
     <div class="polls">
       <button class="button button-positive showCreate" ng-click="createPollToggle = !createPollToggle" ng-hide="createPollToggle">Create New Poll</button>
       <div class="createpoll" ng-hide="!createPollToggle">
@@ -62,14 +59,21 @@
       </div>
     </div>
     <div>
-      <div ng-repeat="poll in polls()">
-        <div>
-          poll.title
-          <div ng-repeat="answer in poll.answers">
-            answer.text
+      <div class="card" ng-repeat="poll in polls">
+        <div class="item item-text-wrap">
+              {{poll.title}}
+              <a class="" style="float:right; cursor:pointer">delete</a>
+                  <div class="card" ng-repeat="answer in poll.answers">
+                      <div class="item item-text-wrap">
+                        {{answer.answer}}
+                      </div>
+                    </div>
+              <div ng-repeat="answer in poll.answers">
+                {{answer.text}}
+              </div>
           </div>
-        </div>
       </div>
+
     </div>
   </ion-content>
 </ion-view>

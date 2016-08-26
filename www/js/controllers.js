@@ -67,7 +67,7 @@ $scope.chats = Chats.all();
     $scope.addPoll.answers = [{text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}]
     $scope.addPoll.show = [true, true, true, true, true, true, true]
   }
-  $scope.Polls = '';
+  $scope.polls = '';
   $scope.addPoll = {}
   $scope.addPoll.title = '';
   $scope.addPoll.active = false;
@@ -100,7 +100,7 @@ $scope.chats = Chats.all();
   }
   $scope.getPolls = function(){
     Poll.getPolls().then(function(polls){
-      $scope.Polls = polls.data;
+      $scope.polls = polls.data;
     })
   }
   $scope.deletePoll = function(id){
