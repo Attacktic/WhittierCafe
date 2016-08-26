@@ -1,4 +1,3 @@
-
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngStorage'])
 
 .run(function($ionicPlatform) {
@@ -33,21 +32,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.vote', {
-      url: '/vote',
+  .state('tab.chats', {
+      url: '/chats',
       views: {
-        'tab-vote': {
-          templateUrl: 'templates/tab-vote.html',
-          controller: 'VoteCtrl'
+        'tab-chats': {
+          templateUrl: 'templates/tab-chats.html',
+          controller: 'ChatsCtrl'
         }
       }
     })
     .state('tab.chat-detail', {
-      url: '/vote/:chatId',
+      url: '/chats/:chatId',
       views: {
-        'tab-vote': {
+        'tab-chats': {
           templateUrl: 'templates/chat-detail.html',
-          controller: 'VoteDetailCtrl'
+          controller: 'ChatDetailCtrl'
         }
       }
     })

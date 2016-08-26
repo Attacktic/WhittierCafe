@@ -61,6 +61,13 @@ $scope.chats = Chats.all();
 })
 
 .controller('AdminCtrl', function($rootScope, $scope, $state, StorageService, activeUser, Poll) {
+  $scope.clear = function(){
+    $scope.addPoll.title = '';
+    $scope.addPoll.active = false;
+    $scope.addPoll.answers = [{text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}]
+    $scope.addPoll.show = [true, true, true, true, true, true, true]
+  }
+  $scope.Polls = '';
   $scope.addPoll = {}
   $scope.addPoll.title = '';
   $scope.addPoll.active = false;
@@ -89,8 +96,15 @@ $scope.chats = Chats.all();
       answers: valid_answers,
       active: $scope.addPoll.active
     })
+    $scope.getPolls()
   }
-  $scope.polls = function(){
-    return Poll.getPoll()
+  $scope.getPolls = function(){
+    Poll.getPolls().then(function(polls){
+      $scope.Polls = polls.data;
+    })
+  }
+  $scope.deletePoll = function(id){
+    Poll.deletePoll(id);
+    $scope.getPolls()
   }
 })
