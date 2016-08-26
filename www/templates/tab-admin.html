@@ -6,7 +6,7 @@
         <button class="button button-clear button-positive" ng-click="unhide()">
           + Add answer
         </button>
-        <form ng-submit="createPoll()">
+        <form ng-submit="createPoll(); createPollToggle = !createPollToggle; clear()">
           <div class="list">
             <label class="item item-input">
               <input type="text" placeholder="Poll title/question" ng-model="addPoll.title">
@@ -62,7 +62,13 @@
       <div class="card" ng-repeat="poll in polls">
         <div class="item item-text-wrap">
               {{poll.title}}
-              <a class="" style="float:right; cursor:pointer">delete</a>
+              <label class="toggle" style="margin-left: 45%">
+               <input type="checkbox" ng-model="false" ng-value="true">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+              <a ng-click="deletePoll(poll.id)" style="float:right; cursor:pointer">delete</a>
                   <div class="card" ng-repeat="answer in poll.answers">
                       <div class="item item-text-wrap">
                         {{answer.answer}}
