@@ -8,15 +8,18 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('ChatsCtrl', function($scope, Chats, activeUser, $state, Poll) {
-  $scope.polls = ''; //fix
-  $scope.getPolls = function(){
-    Poll.getPolls().then(function(polls){
-      $scope.polls = polls.data;
-    })
+.controller('ChatsCtrl', function($scope, Chats, activeUser, $state ) {
+  $scope.polls = function(){
+
   }
 })
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats, activeUser, $state) {
+  $scope.chat = Chats.get($stateParams.chatId);
+  $scope.$on('$ionicView.enter', function(e) {
+    if(activeUser.needAuth()){
+      $state.go('tab.settings');
+    }
+  });
 })
 
 .controller('AccountCtrl', function($scope, Login, $state, StorageService, activeUser, $rootScope) {
@@ -52,13 +55,17 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AdminCtrl', function($rootScope, $scope, $state, StorageService, activeUser, Poll) {
+  $rootScope.getPolls = function(){
+    return Poll.getPolls().then(function(polls){
+      Poll.parsePolls(polls);
+    })
+  }
   $scope.clear = function(){
     $scope.addPoll.title = '';
     $scope.addPoll.active = false;
     $scope.addPoll.answers = [{text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}, {text:''}]
     $scope.addPoll.show = [true, true, true, true, true, true, true]
   }
-  $scope.polls = '';
   $scope.addPoll = {}
   $scope.addPoll.title = '';
   $scope.addPoll.active = false;
@@ -86,16 +93,14 @@ angular.module('starter.controllers', [])
       title: $scope.addPoll.title,
       answers: valid_answers,
       active: $scope.addPoll.active
-    })
-    $scope.getPolls()
-  }
-  $scope.getPolls = function(){
-    Poll.getPolls().then(function(polls){
-      $scope.polls = polls.data;
+    }).then(function(){
+      console.log("created");
+      Poll.getPolls().then(function(polls){
+        Poll.parsePolls(polls);
+      })
     })
   }
   $scope.deletePoll = function(id){
     Poll.deletePoll(id);
-    $scope.getPolls()
   }
 })
