@@ -20,5 +20,11 @@
     <div class="activeTrue" ng-show="activeUser() === true">
       <button class="button button-block button-assertive" ng-click="logout()">Log out</button>
     </div>
+    <div class="user_points" ng-show="user.points !== null">
+      your points: {{user.points}}
+    </div>
+    <div class="user_points" ng-hide="user.points == null">
+      your points: 0
+    </div>
   </ion-content>
 </ion-view>

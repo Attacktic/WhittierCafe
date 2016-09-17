@@ -1,8 +1,7 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngStorage'])
-
-.run(function($ionicPlatform) {
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.filters', 'ngStorage', 'ngCordova', 'firebase'])
+var fb = new Firebase("https://whittiercafeimages.firebaseio.com/");
+app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
@@ -13,7 +12,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   });
 })
-.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
     .state('tab', {
@@ -32,12 +31,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.polls', {
+      url: '/polls',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-polls': {
+          templateUrl: 'templates/tab-polls.html',
+          controller: 'Polls'
         }
       }
     })
@@ -76,5 +75,4 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   })
 
   $urlRouterProvider.otherwise('/tab/settings');
-
 })

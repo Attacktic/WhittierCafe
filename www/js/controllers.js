@@ -8,18 +8,22 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('ChatsCtrl', function($scope, Chats, activeUser, $state ) {
-  $scope.polls = function(){
-
-  }
-})
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats, activeUser, $state) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('Polls', function($scope, activeUser, $state, Poll) {
+  $scope.polls = '';
   $scope.$on('$ionicView.enter', function(e) {
     if(activeUser.needAuth()){
       $state.go('tab.settings');
     }
   });
+  $scope.getPolls = function(){
+    Poll.getActive().then(function(data){
+      $scope.polls = data.data;
+    })
+  }
+})
+
+.controller('ChatDetailCtrl', function($scope, $stateParams, Chats, activeUser, $state) {
+  $scope.chat = Chats.get($stateParams.chatId);
 })
 
 .controller('AccountCtrl', function($scope, Login, $state, StorageService, activeUser, $rootScope) {
@@ -54,12 +58,20 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AdminCtrl', function($rootScope, $scope, $state, StorageService, activeUser, Poll) {
+.controller('AdminCtrl', function($rootScope, $scope, $state, StorageService, activeUser, Poll, $cordovaCamera, $cordovaImagePicker, $ionicPlatform) {
   $rootScope.getPolls = function(){
     return Poll.getPolls().then(function(polls){
       Poll.parsePolls(polls);
     })
   }
+
+  $scope.changeStatus = function(id){
+    Poll.changeStatus(id)
+    Poll.getPolls().then(function(polls){
+      Poll.parsePolls(polls);
+    })
+  }
+
   $scope.clear = function(){
     $scope.addPoll.title = '';
     $scope.addPoll.active = false;
@@ -102,5 +114,35 @@ angular.module('starter.controllers', [])
   }
   $scope.deletePoll = function(id){
     Poll.deletePoll(id);
+    Poll.getPolls().then(function(polls){
+      Poll.parsePolls(polls);
+    })
   }
-})
+
+$scope.images = [];
+
+/*var fbAuth = fb.getAuth();
+if(fbAuth) {
+   var userReference = fb.child("users/" + fbAuth.uid);
+   var syncArray = $firebaseArray(userReference.child("images"));
+   $scope.images = syncArray;
+} else {
+  var userReference = fb.child("users/" + fbAuth.uid);
+  var syncArray = $firebaseArray(userReference.child("images"));
+  $scope.images = syncArray;
+}*/
+
+$scope.upload = function() {
+   var options = {
+       quality : 75,
+       destinationType : Camera.DestinationType.DATA_URL,
+       sourceType : Camera.PictureSourceType.CAMERA,
+       allowEdit : true,
+       encodingType: Camera.EncodingType.JPEG,
+       popoverOptions: CameraPopoverOptions,
+       targetWidth: 500,
+       targetHeight: 500,
+       saveToPhotoAlbum: false
+   };
+ }
+});

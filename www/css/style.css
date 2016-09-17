@@ -39,3 +39,17 @@ h5{
 .showCreate{
   cursor: pointer;
 }
+
+.active{
+  color:green;
+}
+
+.unnactive{
+  color:red;
+}
+
+.poll-title{
+  margin:auto;
+  text-align: center;
+  margin-top: 30px;
+}
