@@ -4,8 +4,8 @@
       <div class="poll-title">
         {{poll.title | capitalize}}
       </div>
-      <button ng-repeat="answer in poll.answers" class="button button-block button-positive" style="margin:0; border-bottom: 1px solid black;">
-        {{answer.answer}}
+      <button ng-repeat="answer in poll.answers" ng-click="vote(answer.id)" class="button button-block button-positive" style="margin:0; border-bottom: 1px solid black;">
+        {{answer.answer}} {{answer.votes.length}}
       </button>
     </div>
   </ion-content>

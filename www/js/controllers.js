@@ -20,6 +20,11 @@ angular.module('starter.controllers', [])
       $scope.polls = data.data;
     })
   }
+  $scope.vote = function(id){
+    Poll.addVote(id).then(function(){
+      $scope.getPolls()
+    })
+  }
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats, activeUser, $state) {
@@ -118,31 +123,4 @@ angular.module('starter.controllers', [])
       Poll.parsePolls(polls);
     })
   }
-
-$scope.images = [];
-
-/*var fbAuth = fb.getAuth();
-if(fbAuth) {
-   var userReference = fb.child("users/" + fbAuth.uid);
-   var syncArray = $firebaseArray(userReference.child("images"));
-   $scope.images = syncArray;
-} else {
-  var userReference = fb.child("users/" + fbAuth.uid);
-  var syncArray = $firebaseArray(userReference.child("images"));
-  $scope.images = syncArray;
-}*/
-
-$scope.upload = function() {
-   var options = {
-       quality : 75,
-       destinationType : Camera.DestinationType.DATA_URL,
-       sourceType : Camera.PictureSourceType.CAMERA,
-       allowEdit : true,
-       encodingType: Camera.EncodingType.JPEG,
-       popoverOptions: CameraPopoverOptions,
-       targetWidth: 500,
-       targetHeight: 500,
-       saveToPhotoAlbum: false
-   };
- }
 });

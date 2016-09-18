@@ -145,6 +145,7 @@ angular.module('starter.services', [])
     var url = `https://whcbackend.herokuapp.com/polls`
     return $http.get(url)
     .success(function(polls){
+      console.log(polls);
       return polls
     })
     .error(function (error, status){
@@ -176,6 +177,16 @@ angular.module('starter.services', [])
     $http.get(url)
     .success(function(response){
       console.log(response)
+    })
+    .error(function (error, status){
+      console.log(error, status);
+    });
+  }
+  this.addVote = function(answer_id){
+    var url = `https://whcbackend.herokuapp.com/votes/new`
+    return $http.post(url, {answer_id: answer_id, username: localStorage.getItem("ngStorage-admin")}) //user
+    .success(function(response){
+      return response;
     })
     .error(function (error, status){
       console.log(error, status);
