@@ -135,9 +135,30 @@ angular.module('starter.controllers', [])
   $scope.unhide = function(){
     $scope.addPoll.show[$scope.addPoll.show.indexOf(true)] = !$scope.addPoll.show[$scope.addPoll.show.indexOf(true)]
   }
+  $scope.upload = function(index) {
+    var userReference = fb.child("data/");
+    var syncArray = $firebaseArray(userReference.child("images"));
+          var options = {
+              quality : 75,
+              destinationType : Camera.DestinationType.DATA_URL,
+              sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+              allowEdit : true,
+              encodingType: Camera.EncodingType.JPEG,
+              popoverOptions: CameraPopoverOptions,
+              targetWidth: 500,
+              targetHeight: 200,
+              saveToPhotoAlbum: false
+          };
+          $cordovaCamera.getPicture(options).then(function(imageData) {
+              syncArray.$add({image: imageData}).then(function(key) {
+                  $scope.addPoll.answers[index].img = "'"+key + "'";
+              });
+          }, function(error) {
+              console.error(error);
+          });
+      }
   $scope.createPoll = function(){
     var valid_answers = [];
-    console.log($scope.addPoll.answers);
     $scope.addPoll.answers.forEach(function(answer){
       if (answer.text !== ''){
         valid_answers.push(answer);
@@ -168,26 +189,5 @@ angular.module('starter.controllers', [])
       })
     })
   }
-  $scope.upload = function(index) {
-    var userReference = fb.child("data/");
-    var syncArray = $firebaseArray(userReference.child("images"));
-          var options = {
-              quality : 75,
-              destinationType : Camera.DestinationType.DATA_URL,
-              sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
-              allowEdit : true,
-              encodingType: Camera.EncodingType.JPEG,
-              popoverOptions: CameraPopoverOptions,
-              targetWidth: 500,
-              targetHeight: 500,
-              saveToPhotoAlbum: false
-          };
-          $cordovaCamera.getPicture(options).then(function(imageData) {
-              syncArray.$add({image: imageData}).then(function(key) {
-                  $scope.addPoll.answers[index].img = key;
-              });
-          }, function(error) {
-              console.error(error);
-          });
-      }
+//https://whittiercafeimages.firebaseio.com/data/images/-KS28pm3kpzxwkElm5l-
 });

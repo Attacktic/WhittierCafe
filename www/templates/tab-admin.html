@@ -78,7 +78,7 @@
               <a ng-click="resetVotes(poll.id)" style="float:right; cursor:pointer">reset votes </a>
                   <div class="card" ng-repeat="answer in poll.answers">
                       <div class="item item-text-wrap">
-                        {{answer.answer}}
+                        {{answer.answer}} {{answer.img}}
                         <div style="float:right">
                           votes: {{answer.votes.length}}
                         </div>

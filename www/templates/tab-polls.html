@@ -1,13 +1,18 @@
-<ion-view view-title="Polls" ng-init="getPolls(); getUser()">
+<ion-view view-title="Vote" ng-init="getPolls(); getUser()">
   <ion-content>
     <div ng-repeat="poll in polls">
       <div class="poll-title">
         {{poll.title | capitalize}}
       </div>
       <div class="buttoncontainer" ng-hide="poll.voted">
-        <button ng-repeat="answer in poll.answers" ng-click="vote(answer.id);" class="button button-block button-positive" style="margin:0; border-bottom: 1px solid black;">
-          {{answer.answer}} {{answer.votes.length}}
-        </button>
+        <div class="one" ng-repeat="answer in poll.answers" ng-click="vote(answer.id);">
+          <button ng-show="answer.img.length<1" class="button button-block button-positive" style="margin:0; border-bottom: 1px solid black;">
+            {{answer.answer}} {{answer.votes.length}}
+          </button>
+          <div ng-hide="answer.img.length<1" style="width:100%;display:block;height:50px;background-color:blue;color:white;line-height:3.5;text-align:center;margin:0; border-bottom: 1px solid black;border-radius:5px" ng-style="{'background-image': 'url({{answer.img}})' }">
+            {{answer.answer}} {{answer.votes.length}}
+          </div>
+        </div>
       </div>
       <div class="voted" ng-show="poll.voted" style="text-align:center">
         Thank you for voting!
