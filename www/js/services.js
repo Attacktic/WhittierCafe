@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.service("activeUser", function($localStorage, $rootScope, $state){
+.service("activeUser", function($localStorage, $rootScope, $state, $http){
   $rootScope.hidden = true;
   this.active = function(){
     if ($localStorage.user || $localStorage.admin){
@@ -16,8 +16,12 @@ angular.module('starter.services', [])
     return $localStorage.admin ? true:false;
   }
   this.userData = function(username){
-    var data = {username: username}
-    return $http.post(`https://whcbackend.herokuapp.com/user/data`, username)
+    var user = localStorage.getItem("ngStorage-user");
+    if (localStorage.getItem("ngStorage-admin")){
+      user = localStorage.getItem("ngStorage-admin");
+    }
+    var data = {username: user.replace(/"/g,"")}
+    return $http.post(`https://whcbackend.herokuapp.com/user/data`, data)
     .success(function(data){
       return data.data;
     })
@@ -133,6 +137,7 @@ angular.module('starter.services', [])
   this.createPoll = function(form){
   var url = `https://whcbackend.herokuapp.com/createpoll`
   var data = form;
+  console.log(data);
   return $http.post(url, data)
   .success(function(response){
     console.log("created a poll")
@@ -164,7 +169,7 @@ angular.module('starter.services', [])
   }
   this.deletePoll = function(id){
     var url = `https://whcbackend.herokuapp.com/polls/${id}/delete`
-    $http.get(url)
+    return $http.get(url)
     .success(function(response){
       console.log(response)
     })
@@ -184,7 +189,21 @@ angular.module('starter.services', [])
   }
   this.addVote = function(answer_id){
     var url = `https://whcbackend.herokuapp.com/votes/new`
-    return $http.post(url, {answer_id: answer_id, username: localStorage.getItem("ngStorage-admin")}) //user
+    var user = localStorage.getItem("ngStorage-user");
+    if (localStorage.getItem("ngStorage-admin")){
+      user = localStorage.getItem("ngStorage-admin");
+    }
+    return $http.post(url, {answer_id: answer_id, username: user}) //user
+    .success(function(response){
+      return response;
+    })
+    .error(function (error, status){
+      console.log(error, status);
+    });
+  }
+  this.resetVotes = function(pollid){
+    var url = `https://whcbackend.herokuapp.com/reset/${pollid}`
+    return $http.get(url)
     .success(function(response){
       return response;
     })

@@ -1,5 +1,5 @@
 <ion-view view-title="Account">
-  <ion-content padding="true">
+  <ion-content padding="true" ng-init="getUser()">
     <div class="activeFalse" ng-hide="activeUser() === true">
     <form ng-submit="verify()" name="loginform">
     <div class="list">
@@ -20,10 +20,10 @@
     <div class="activeTrue" ng-show="activeUser() === true">
       <button class="button button-block button-assertive" ng-click="logout()">Log out</button>
     </div>
-    <div class="user_points" ng-show="user.points !== null">
+    <div class="user_points" ng-show="activeUser() === true && user.points">
       your points: {{user.points}}
     </div>
-    <div class="user_points" ng-hide="user.points == null">
+    <div class="user_points" ng-show="activeUser() === true && user.points == null">
       your points: 0
     </div>
   </ion-content>

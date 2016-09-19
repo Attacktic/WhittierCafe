@@ -1,12 +1,17 @@
-<ion-view view-title="Polls" ng-init="getPolls()">
+<ion-view view-title="Polls" ng-init="getPolls(); getUser()">
   <ion-content>
     <div ng-repeat="poll in polls">
       <div class="poll-title">
         {{poll.title | capitalize}}
       </div>
-      <button ng-repeat="answer in poll.answers" ng-click="vote(answer.id)" class="button button-block button-positive" style="margin:0; border-bottom: 1px solid black;">
-        {{answer.answer}} {{answer.votes.length}}
-      </button>
+      <div class="buttoncontainer" ng-hide="poll.voted">
+        <button ng-repeat="answer in poll.answers" ng-click="vote(answer.id);" class="button button-block button-positive" style="margin:0; border-bottom: 1px solid black;">
+          {{answer.answer}} {{answer.votes.length}}
+        </button>
+      </div>
+      <div class="voted" ng-show="poll.voted" style="text-align:center">
+        Thank you for voting!
+      </div>
     </div>
   </ion-content>
 </ion-view>
