@@ -105,7 +105,6 @@ angular.module('starter.controllers', [])
       Poll.parsePolls(polls);
     })
   }
-
   $scope.changeStatus = function(id){
     Poll.changeStatus(id)
     Poll.getPolls().then(function(polls){
@@ -135,6 +134,7 @@ angular.module('starter.controllers', [])
   $scope.unhide = function(){
     $scope.addPoll.show[$scope.addPoll.show.indexOf(true)] = !$scope.addPoll.show[$scope.addPoll.show.indexOf(true)]
   }
+
   $scope.upload = function(index) {
     var userReference = fb.child("data/");
     var syncArray = $firebaseArray(userReference.child("images"));
@@ -145,13 +145,15 @@ angular.module('starter.controllers', [])
               allowEdit : true,
               encodingType: Camera.EncodingType.JPEG,
               popoverOptions: CameraPopoverOptions,
-              targetWidth: 500,
+              targetWidth: 600,
               targetHeight: 200,
               saveToPhotoAlbum: false
           };
           $cordovaCamera.getPicture(options).then(function(imageData) {
               syncArray.$add({image: imageData}).then(function(key) {
-                  $scope.addPoll.answers[index].img = "'"+key + "'";
+                  Poll.getImg(key + ".json").then(function(thekey){
+                    $scope.addPoll.answers[index].img = thekey.data.image;
+                  })
               });
           }, function(error) {
               console.error(error);
@@ -189,5 +191,4 @@ angular.module('starter.controllers', [])
       })
     })
   }
-//https://whittiercafeimages.firebaseio.com/data/images/-KS28pm3kpzxwkElm5l-
-});
+  });

@@ -113,6 +113,15 @@ angular.module('starter.services', [])
 })
 
 .service("Poll", function($localStorage, $rootScope, $state, $http){
+  this.getImg = function(url){
+    return $http.get(url)
+    .success(function(what){
+      return what.data;
+    })
+    .error(function (error, status){
+      console.log(error, status);
+    });
+  }
   this.uploadImg = function(imgurl){
     var data = {imgurl: imgurl}
     return $http.post(`https://whcbackend.herokuapp.com/polls/upload`, data)
