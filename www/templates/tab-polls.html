@@ -1,10 +1,10 @@
-<ion-view view-title="Vote" ng-init="getPolls(); getUser()">
+<ion-view view-title="Vote" ng-init="getPolls(); getUser()" style="background-color:#B8860B;">
   <ion-content>
-    <div class="card" ng-repeat="poll in polls">
-         <div class="item" style="text-align:center">
+    <div class="card" ng-repeat="poll in polls" style="border-color:#B8860B;background-color:#262626">
+         <div class="item" style="text-align:center; border-color:#B8860B; background-color:#262626;color:white;font-weight:bold">
           {{poll.title | capitalize}}
          </div>
-         <div class="item item-text-wrap">
+         <div class="item item-text-wrap" style="border-color:#B8860B; background-color:#262626;color:white">
            <div class="buttoncontainer" ng-hide="poll.voted">
              <div class="one" ng-repeat="answer in poll.answers" ng-click="vote(answer.id);">
                <button ng-show="answer.img.length<1" class="button button-block button-positive" style="margin:0; border-bottom: 1px solid black;">

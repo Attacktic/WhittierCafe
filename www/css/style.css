@@ -54,10 +54,32 @@ h5{
   margin-top: 30px;
 }
 
-.red{
-  color:red;
+.ion-toggle-filled{
+  color:green;
 }
 
-.green{
-  color:green;
+.tab-nav {
+  background-color: #434343;
+  border-color:black;
+}
+
+.tabs{
+  background-color: #434343;
+  border-color:black;
+}
+
+.icon{
+  color:white;
+}
+
+.tab-title{
+  color:white;
+}
+
+.background{
+  background-repeat:no-repeat;background-size: 100%; background-image: url('https://pixabay.com/static/uploads/photo/2015/07/11/23/00/coffee-841425_960_720.jpg')
+}
+
+.button-energized{
+  background-color: #B8860B;
 }
