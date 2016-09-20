@@ -1,21 +1,21 @@
-<ion-view view-title="Vote" ng-init="getPolls(); getUser()" style="background-color:#B8860B;">
+<ion-view view-title="Vote" ng-init="getPolls(); getUser()" style="background-color:#262626">
   <ion-content>
-    <div class="card" ng-repeat="poll in polls" style="border-color:#B8860B;background-color:#262626">
-         <div class="item" style="text-align:center; border-color:#B8860B; background-color:#262626;color:white;font-weight:bold">
+    <div class="card" ng-repeat="poll in polls" style="border-color:#B8860B;background-color:#434343">
+         <div class="item" style="text-align:center; border-color:#B8860B; background-color:#434343;color:white;font-weight:bold">
           {{poll.title | capitalize}}
          </div>
-         <div class="item item-text-wrap" style="border-color:#B8860B; background-color:#262626;color:white">
+         <div class="item item-text-wrap" style="border-color:#B8860B; background-color:#434343;color:#434343">
            <div class="buttoncontainer" ng-hide="poll.voted">
              <div class="one" ng-repeat="answer in poll.answers" ng-click="vote(answer.id);">
-               <button ng-show="answer.img.length<1" class="button button-block button-positive" style="margin:0; border-bottom: 1px solid black;">
+               <button ng-show="answer.img.length<1" class="button button-block button-positive" style="margin:0; border-bottom: 1px solid #434343;background-color:#262626">
                  {{answer.answer}} {{answer.votes.length}}
                </button>
-               <div ng-hide="answer.img.length<1" style="width:100%;display:block;height:50px;background-color:blue;color:white;line-height:3.5;text-align:center;margin:0; border-bottom: 1px solid black;border-radius:5px; background-repeat:no-repeat;background-size: 100%;" ng-style="{'background-image': 'url(data:image/png;base64,{{answer.img}})' }">
+               <div ng-hide="answer.img.length<1" style="width:100%;display:block;height:50px;background-color:blue;color:white;text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);line-height:3.5;text-align:center;margin:0; border-bottom: 1px solid black;border-radius:5px; background-repeat:no-repeat;background-size: 100%;" ng-style="{'background-image': 'url(data:image/png;base64,{{answer.img}})' }">
                  {{answer.answer}} {{answer.votes.length}}
                </div>
              </div>
            </div>
-           <div class="voted" ng-show="poll.voted" style="text-align:center">
+           <div class="voted" ng-show="poll.voted" style="text-align:center;color:white">
              Thank you for voting!
            </div>
          </div>

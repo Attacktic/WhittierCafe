@@ -79,19 +79,19 @@
     <div>
       <div class="card" ng-model="polls" ng-repeat="poll in polls track by $index">
         <div class="item item-text-wrap">
-          <div class="top" style="display:block">
+          <div class="top" style="display:block;border-bottom:1px solid black;">
               <div class="titlepoll"  style="display:inline-block">
                 Poll Title: {{poll.title}}
               </div>
-              <div class="buttons" style="display:inline-block; float:right">
-                <div style="display:inline-block;margin-right:20px;">
+              <div class="buttons" style="display:inline-block; float:left;margin-bottom:10px;margin-top:10px">
+                <div style="display:inline-block;margin-right:40px;">
                 <div type="button" ng-class="poll.active == 'true' ? 'ion-toggle-filled' : 'ion-toggle'" ng-click="changeStatus(poll.id)" style="display:inline-block;"> </div>
-                <div style="display:inline-block;">
+                <div ng-click="changeStatus(poll.id)" style="display:inline-block;">
                   {{poll.active == 'true' ? 'active' : 'not active'}}
                 </div>
               </div>
                 <a class="ion-trash-a" ng-click="deletePoll(poll.id)" style="float:right; cursor:pointer;color:black"></a>
-                <a class="ion-ios-refresh" ng-click="resetVotes(poll.id)" style="float:right; cursor:pointer;margin-right:20px;color:black;"> reset votes</a>
+                <a class="ion-ios-refresh" ng-click="resetVotes(poll.id)" style="float:right; cursor:pointer;margin-right:20px;color:black;border-right:1px solid black;padding-right:20px;"> reset votes</a>
               </div>
             </div>
                   <div class="card" ng-repeat="answer in poll.answers" style="width: 100%">
