@@ -1,5 +1,26 @@
 <ion-view view-title="Admin">
-  <ion-content padding="true" ng-init="getPolls();" style="background-color:#262626">
+  <ion-content padding="true" ng-init="getPolls();allVotes()" style="background-color:#262626">
+    <div class="card padding">
+      <h5 style="font-weight:bold">This Week's Voters</h5>
+      <ul class="card padding">
+        <li ng-show="voters != 'empty'" ng-repeat="vote in voters" class="ion-person">
+           {{vote.first_name}}: {{vote.email}}
+        </li>
+        <li ng-show="voters == 'empty'">No votes this week yet</li>
+      </ul>
+      <div ng-show="voters != 'empty'" style="display:block; margin-right:10px" class="ion-android-star-outline">
+        This Week's Winner:
+        <div ng-show="clicked">
+          <div>
+            Name: {{winner.first_name}}
+          </div>
+          <div>
+            Email: {{winner.email}}
+          </div>
+        </div>
+      </div>
+      <button ng-show="voters != 'empty'" style="display:block" type="button" class="button button-small" ng-click="selectRandom(); clicked = true"> Pick random</button>
+    </div>
     <div class="polls">
       <button class="button button-positive showCreate" style="background-color: #B8860B;" ng-click="createPollToggle = !createPollToggle" ng-hide="createPollToggle">Create New Poll</button>
       <div class="card padding createpoll" ng-hide="!createPollToggle">

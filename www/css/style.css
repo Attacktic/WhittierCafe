@@ -77,9 +77,12 @@ h5{
 }
 
 .background{
-  background-repeat:no-repeat;background-size: 100%; background-image: url('https://pixabay.com/static/uploads/photo/2015/07/11/23/00/coffee-841425_960_720.jpg')
+  background-repeat:no-repeat;background-size: 100%; background-image: url('http://i1174.photobucket.com/albums/r601/Attacktic2/wcIMG_10862_zpsth5rgdrq.jpg')
 }
-
+.infobackground{
+  background-repeat:no-repeat;background-size: 100%;
+  background-image: url('http://i1174.photobucket.com/albums/r601/Attacktic2/infob_zpsjeoanau0.jpg');
+}
 .button-energized{
   background-color: #B8860B;
 }

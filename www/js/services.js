@@ -113,6 +113,21 @@ angular.module('starter.services', [])
 })
 
 .service("Poll", function($localStorage, $rootScope, $state, $http){
+  this.getWinner = function(voters){
+    var random = voters[Math.floor(Math.random()*voters.length)]
+    console.log(random);
+    return random;
+  }
+  this.getVoters = function(){
+    return $http.get(`https://whcbackend.herokuapp.com/weekvotes`)
+    .success(function(users){
+      console.log(users);
+      return users;
+    })
+    .error(function (error, status){
+      console.log(error, status);
+    });
+  }
   this.getImg = function(url){
     return $http.get(url)
     .success(function(what){

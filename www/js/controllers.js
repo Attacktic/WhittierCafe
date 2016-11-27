@@ -100,6 +100,16 @@ angular.module('starter.controllers', [])
 
 .controller('AdminCtrl', function($rootScope, $scope, $state, StorageService, activeUser, Poll, $cordovaImagePicker, $ionicPlatform, $firebaseArray, $cordovaCamera) {
   var fb = new Firebase("https://whittiercafeimages.firebaseio.com/");
+  $scope.clicked = false;
+  $scope.winner = '';
+  $scope.allVotes = function(){
+    return Poll.getVoters().then(function(users){
+      $scope.voters = users.data;
+    })
+  }
+  $scope.selectRandom = function(){
+    $scope.winner = Poll.getWinner($scope.voters);
+  }
   $rootScope.getPolls = function(){
     return Poll.getPolls().then(function(polls){
       Poll.parsePolls(polls);
@@ -171,7 +181,6 @@ angular.module('starter.controllers', [])
       answers: valid_answers,
       active: $scope.addPoll.active
     }).then(function(){
-      console.log("created");
       Poll.getPolls().then(function(polls){
         Poll.parsePolls(polls);
       })
